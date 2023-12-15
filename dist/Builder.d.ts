@@ -1,6 +1,6 @@
 /// <reference types="node" resolution-mode="require"/>
 import { BufferBuilder, ByteOrder } from "@triforce-heroes/triforce-core";
-type BuilderCallback<T = unknown> = (data: T, { builder, build, error, }: {
+export type BuilderCallback<T = unknown> = (data: T, { builder, build, error, }: {
     builder: BufferBuilder;
     build(name: string, data: unknown): unknown;
     error(message: string): void;
@@ -12,4 +12,3 @@ export declare class Builder {
     add<T>(name: string, callback: BuilderCallback<T>): void;
     private buildUsing;
 }
-export {};

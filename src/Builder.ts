@@ -2,7 +2,7 @@ import { BufferBuilder, ByteOrder } from "@triforce-heroes/triforce-core";
 
 import { BuilderError } from "./errors/BuilderError.js";
 
-type BuilderCallback<T = unknown> = (
+export type BuilderCallback<T = unknown> = (
   data: T,
   {
     builder,

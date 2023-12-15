@@ -34,6 +34,8 @@ describe("parser", () => {
   it("array logic", () => {
     const parser = new Parser();
 
+    parser.add("item", ({ consumer }) => consumer.readString(1));
+
     parser.add("array", ({ consumer, consume }) => {
       const count = Number(consumer.readString(1));
 
@@ -52,10 +54,8 @@ describe("parser", () => {
       return { items };
     });
 
-    parser.add("item", ({ consumer }) => consumer.readString(1));
-
     expect(
-      parser.parse(new BufferConsumer(Buffer.from("5:a,b,c,d,e"))),
+      parser.parse(new BufferConsumer(Buffer.from("5:a,b,c,d,e")), "array"),
     ).toStrictEqual({ items: ["a", "b", "c", "d", "e"] });
   });
 

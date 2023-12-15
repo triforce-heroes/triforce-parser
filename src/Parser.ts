@@ -2,7 +2,7 @@ import { BufferConsumer } from "@triforce-heroes/triforce-core";
 
 import { ParserError } from "./errors/ParserError.js";
 
-type ParserCallback = ({
+export type ParserCallback<T = unknown> = ({
   consumer,
   consume,
   error,
@@ -10,15 +10,15 @@ type ParserCallback = ({
   consumer: BufferConsumer;
   consume(name: string): unknown;
   error(message: string): void;
-}) => unknown;
+}) => T;
 
 export class Parser {
   private parserMain: string | undefined;
 
   private readonly parsers = new Map<string, ParserCallback>();
 
-  public parse(consumer: BufferConsumer) {
-    return this.consumeUsing(this.parserMain!, consumer);
+  public parse(consumer: BufferConsumer, parserName?: string) {
+    return this.consumeUsing(parserName ?? this.parserMain!, consumer);
   }
 
   public add(name: string, callback: ParserCallback) {
