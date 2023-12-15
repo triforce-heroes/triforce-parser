@@ -1,2 +1,1 @@
-export class BuilderError extends Error {
-}
+export class BuilderError extends Error{}
